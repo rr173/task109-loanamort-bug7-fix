@@ -1,0 +1,20 @@
+# Exclude build artifacts and local vendor/ from the Docker build context.
+# benzhi.Dockerfile does not use vendor/ (it runs `go mod download`), and the
+# multi-arch Dockerfile resolves deps from go.mod/go.sum too.
+vendor/
+**/vendor/
+**/.git/
+**/.git/**
+*.db
+*.db-*
+loans.db
+**/*_test.go
+cmd/
+.gitignore
+Dockerfile
+benzhi.Dockerfile
+build_benzhi_docker.sh
+BENZHI_README.md
+BUG_REPRO.md
+题目信息.md
+component-versions.json
