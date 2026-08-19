@@ -404,7 +404,9 @@ func scanPayment(sc scanner, p *loan.Payment) error {
 }
 
 func collectPayments(rows *sql.Rows) ([]loan.Payment, error) {
-	var out []loan.Payment
+	// Start non-nil so an empty result encodes as JSON [] rather than null,
+	// letting callers iterate without a nil guard. Matches ListBorrowers/ListLoans.
+	out := make([]loan.Payment, 0)
 	for rows.Next() {
 		var p loan.Payment
 		if err := scanPayment(rows, &p); err != nil {
